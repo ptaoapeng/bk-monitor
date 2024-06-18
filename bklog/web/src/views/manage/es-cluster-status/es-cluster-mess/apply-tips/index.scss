@@ -1,0 +1,29 @@
+@import '@/scss/mixins/flex.scss';
+
+.tips-box {
+  height: 52px;
+  padding: 0 28px;
+  font-size: 14px;
+  color: #313238;
+  background: #FFF;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px 0 #1919290d;
+  justify-content: space-between;
+
+  @include flex-align(center);
+
+  .tips-right {
+    .bk-button-text {
+      font-size: 12px;
+    }
+
+    .bk-icon {
+      margin-right: 6px;
+      font-size: 16px;
+    }
+
+    .edit {
+      margin-right: 25px;
+    }
+  }
+}

@@ -135,6 +135,7 @@ import NoviceGuide from '@/components/novice-guide';
 import jsCookie from 'js-cookie';
 import GlobalSettingDialog from '@/components/global-setting';
 import NoticeComponent from '@blueking/notice-component-vue2';
+import ClusterNotify from '@/components/cluster-notify';
 import '@blueking/notice-component-vue2/dist/style.css';
 
 export default {
@@ -241,6 +242,18 @@ export default {
 
     this.$store.state.isExternal = window.IS_EXTERNAL ? JSON.parse(window.IS_EXTERNAL) : false;
   },
+  mounted() {
+    const h = this.$createElement;
+    this.$bkNotify({
+      title: '你好',
+      theme: 'warning',
+      message: h(ClusterNotify),
+      useHTMLString: true,
+      limitLine: 0,
+      delay: 0,
+      position: 'bottom-right'
+    });
+  },
   methods: {
     /** 初始化脱敏灰度相关的数据 */
     initMaskingToggle() {
@@ -275,50 +288,6 @@ export default {
       }
 
       return 'bk-icon icon-home-shape';
-    },
-    handleClickNavItem(id) {
-      this.$router.push({
-        name: id,
-        query: {
-          spaceUid: this.$store.state.spaceUid
-        }
-      });
-      if (id === 'default-dashboard') {
-        this.routerKey = this.routerKey + 1;
-      }
-    },
-    handleToggle(val) {
-      this.isExpand = val;
-    },
-    getUserGuide() {
-      this.$http
-        .request('meta/getUserGuide')
-        .then(res => {
-          this.$store.commit('setUserGuideData', res.data);
-        })
-        .catch(e => {
-          console.warn(e);
-        });
-    },
-    getRouteHref(pageName) {
-      const newUrl = this.$router.resolve({
-        name: pageName,
-        query: {
-          spaceUid: this.$store.state.spaceUid
-        }
-      });
-      return newUrl.href;
-    },
-    /** 侧边导航菜单 */
-    getGroupChildren(list) {
-      if (this.isExternal && this.activeTopMenu.id === 'manage') {
-        // 外部版只保留【日志提取任务】
-        return list.filter(menu => menu.id === 'log-extract-task');
-      }
-      return list;
-    },
-    showAlertChange(v) {
-      this.$store.commit('updateNoticeAlert', v);
     }
   }
 };

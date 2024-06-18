@@ -1,0 +1,14 @@
+@import '@/scss/mixins/flex.scss';
+
+.notify-box {
+  .btn-box {
+    margin-top: 10px;
+    justify-content: flex-end;
+
+    @include flex-align(center);
+
+    .bk-primary {
+      margin-left: 24px;
+    }
+  }
+}

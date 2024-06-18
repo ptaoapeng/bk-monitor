@@ -750,5 +750,9 @@ export default {
   '最大自定义分片数为: {n}': 'The maximum number of custom shards is: {n}',
   '最大自定义副本数为: {n}': 'The maximum number of custom replies is: {n}',
   '是否保存本次操作？': 'Do you want to save this operation?',
-  '容量审核中，请等待': 'Capacity review is in progress, please wait.'
+  '容量审核中，请等待': 'Capacity review is in progress, please wait.',
+  '集群申请中，当前处于 {0} 节点，可跳转至 {1} 查看':
+    'In resource application, there is currently {0} node. You can jump to {1} to view it.',
+  '该功能负责接入、管理集群，若为 IEG 项目，可通过集群申请能力申请集群，非 IEG 项目可按照各 BG 的 ES 流程申请':
+    'This function is responsible for accessing and managing clusters. If it is an IEG project, you can apply for a cluster through the cluster application capability. Non-IEG projects can follow the ES application process of each BG.'
 };

@@ -31,19 +31,37 @@
       class="es-cluster-list-container"
       :style="`width: calc(100% - ${introWidth}px);`"
     >
+      <bk-alert
+        type="info"
+        class="top-info"
+        :title="
+          $t(
+            '该功能负责接入、管理集群，若为 IEG 项目，可通过集群申请能力申请集群，非 IEG 项目可按照各 BG 的 ES 流程申请'
+          )
+        "
+        closable
+      ></bk-alert>
       <div class="main-operator-container">
-        <bk-button
-          v-cursor="{ active: isAllowedCreate === false }"
-          theme="primary"
-          style="width: 120px"
-          :disabled="isAllowedCreate === null || tableLoading"
-          data-test-id="esAccessBox_button_addNewEsAccess"
-          @click="addDataSource"
-          >{{ $t('新建') }}
-        </bk-button>
+        <div class="left-btn">
+          <bk-button
+            v-cursor="{ active: isAllowedCreate === false }"
+            theme="primary"
+            :disabled="isAllowedCreate === null || tableLoading"
+            data-test-id="esAccessBox_button_addNewEsAccess"
+            @click="addDataSource"
+          >
+            {{ $t('集群接入') }}
+          </bk-button>
+          <bk-button
+            :disabled="tableLoading"
+            @click="applyDataSource"
+          >
+            {{ $t('集群申请') }}
+          </bk-button>
+        </div>
         <bk-input
           v-model="params.keyword"
-          style="float: right; width: 360px"
+          style="width: 360px"
           right-icon="bk-icon icon-search"
           data-test-id="esAccessBox_input_search"
           :placeholder="$t('搜索ES源名称，地址，创建人')"
@@ -52,6 +70,8 @@
         >
         </bk-input>
       </div>
+      <apply-tips style="margin-bottom: 16px" />
+      <apply-sidebar :is-show.sync="isShowSidebar" />
       <bk-table
         ref="clusterTable"
         v-bkloading="{ isLoading: tableLoading }"
@@ -305,13 +325,17 @@ import {
 } from '../../../../common/util';
 import * as authorityMap from '../../../../common/authority-map';
 import EmptyStatus from '@/components/empty-status';
+import ApplyTips from './apply-tips';
+import ApplySidebar from './apply-sidebar';
 
 export default {
   name: 'EsClusterMess',
   components: {
     EsSlider,
     IntroPanel,
-    EmptyStatus
+    EmptyStatus,
+    ApplyTips,
+    ApplySidebar
   },
   mixins: [dragMixin],
   data() {
@@ -411,7 +435,8 @@ export default {
       emptyType: 'empty',
       filterSearchObj: {},
       isFilterSearch: false,
-      settingCacheKey: 'collection'
+      settingCacheKey: 'collection',
+      isShowSidebar: false
     };
   },
   computed: {
@@ -613,6 +638,9 @@ export default {
         }
       }
     },
+    applyDataSource() {
+      this.isShowSidebar = true;
+    },
     // 建索引集
     createIndexSet(row) {
       this.$router.push({
@@ -768,8 +796,25 @@ export default {
   transition: padding 0.5s;
   justify-content: space-between;
 
+  .top-info {
+    margin-bottom: 16px;
+  }
+
   .main-operator-container {
-    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+
+    .left-btn {
+      .bk-button {
+        width: 120px;
+      }
+
+      > :last-child {
+        margin-left: 12px;
+      }
+    }
   }
 
   .king-table {

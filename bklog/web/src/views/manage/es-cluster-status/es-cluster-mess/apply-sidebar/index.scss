@@ -1,0 +1,116 @@
+@import '@/scss/mixins/flex.scss';
+
+.apply-sidebar {
+  padding: 28px 40px;
+
+  .cluster-tips-btn {
+    position: absolute;
+    top: 92px;
+    left: 440px;
+    z-index: 999;
+    width: 160px;
+    font-size: 12px;
+    color: #3A84FF;
+    text-align: right;
+    cursor: pointer;
+  }
+
+  .form-inline-box {
+    width: 100%;
+    margin-top: 20px;
+    align-items: center;
+
+    .bk-form-item {
+      /* stylelint-disable-next-line declaration-no-important */
+      margin-top: 0 !important;
+    }
+
+    .bk-select {
+      width: 100%;
+    }
+
+    .submit-box {
+      > :first-child {
+        margin-right: 8px;
+      }
+
+      .bk-button {
+        min-width: 88px;
+      }
+    }
+
+    .hot-cold-data-tips {
+      position: relative;
+      top: -25px;
+      left: 62px;
+      float: left;
+      width: 500px;
+      font-size: 12px;
+      color: #63656E;
+
+      @include flex-justify(space-between);
+
+      .icon-info {
+        display: inline-block;
+        width: 28px;
+        font-size: 16px;
+        line-height: 16px;
+        color: #979BA5;
+        text-align: left;
+      }
+    }
+  }
+
+  .form-edit-box {
+    align-items: center;
+
+    @include flex-justify(space-between);
+
+    .edit-unit {
+      height: 100%;
+      padding: 0 8px;
+      margin-left: -1px;
+      font-size: 12px;
+      color: #63656E;
+      background: #FAFBFD;
+      border: 1px solid #C4C6CC;
+      border-left: none;
+      border-radius: 0 2px 2px 0;
+    }
+  }
+}
+
+.cluster-tips {
+  padding: 16px 22px ;
+  font-size: 12px;
+
+  .cluster-title {
+    display: inline-block;
+    color: #313238;
+  }
+
+  .plan-box {
+
+    margin-top: 8px;
+    line-height: 20px;
+    color: #63656E;
+    flex-direction: column;
+
+    @include flex-justify(start);
+
+    :first-child {
+      margin-left: -2px;
+
+      &::before {
+        position: relative;
+        top: 2px;
+        left: -4px;
+        display: inline-block;
+        width: 2px;
+        height: 12px;
+        background: #3A84FF;
+        content: ' ';
+      }
+    }
+  }
+}
